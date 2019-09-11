@@ -423,6 +423,32 @@ http://stackoverflow.com/questions/3394835/args-and-kwargs
 
 中文: http://taizilongxu.gitbooks.io/stackoverflow-about-python/content/3/README.html
 
+```
+def log(func):
+    def wrapper(*args,**kw):
+        print('call %s():'% func.__name__)
+        return func(*args,**kw)
+    return wrapper
+    
+@log
+def now():
+    print('2019-09-11')
+```
+
+
+```
+def log(text):
+    def decorator(func):
+        def wrapper(*args,**kw):
+            print('%s %s():'% (text, func.__name__))
+            return func(*args,**kw)
+        return wrapper
+    
+@log('execute')
+def now():
+    print('2019-09-11')
+```
+
 ## 12 鸭子类型
 
 “当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子。”
